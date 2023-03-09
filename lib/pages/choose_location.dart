@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 
 class ChooseLocation extends StatefulWidget {
-  const ChooseLocation({super.key});
-
   @override
   State<ChooseLocation> createState() => _ChooseLocationState();
 }
 
 class _ChooseLocationState extends State<ChooseLocation> {
+  int counter = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    print('init state function run');
+  }
+
   @override
   Widget build(BuildContext context) {
+    print('build function is running');
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
@@ -18,7 +25,14 @@ class _ChooseLocationState extends State<ChooseLocation> {
         centerTitle: true,
         elevation: 0,
       ),
-      body: Text('location page'),
+      body: TextButton(
+        onPressed: () {
+          setState(() {
+            counter += 1;
+          });
+        },
+        child: Text('the number is: $counter'),
+      ),
     );
   }
 }
