@@ -1,5 +1,6 @@
 import 'package:http/http.dart';
 import 'dart:convert'; // used for converting json string
+import 'package:intl/intl.dart';
 
 class WorldTime {
   late String location; // location name for the ui
@@ -29,7 +30,8 @@ class WorldTime {
       // print(offset);
 
       // set the time variable property
-      time = now.toString();
+      time = DateFormat.jm().format(now);
+      print(time);
     } catch (error) {
       print('the error is $error');
       time = 'could not get the data, probably due to bad internet connection';
