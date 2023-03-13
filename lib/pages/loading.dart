@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter__world_time/services/world_time.dart';
+import 'package:flutter__world_time/pages/home.dart';
 
 class Loading extends StatefulWidget {
   const Loading({super.key});
@@ -9,18 +10,21 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> {
-  String time = 'loading';
-
   void setupWorldTime() async {
     WorldTime contoh = WorldTime(
         location: 'london', flag: 'england.png', url: 'Europe/London');
     await contoh.getTime();
-    print(contoh.time);
-    print(contoh);
-    setState(() {
-      time = contoh.time;
+
+    // digunakan untuk memberi layer home diatas layer loadnig
+    // Navigator.pushNamed(context, '/home');
+
+    // (pushReplacementNamed) digunakan untuk me replace layer loading dengan layer home
+    //
+    Navigator.pushReplacementNamed(context, '/home', arguments: {
+      'location': contoh.location,
+      'flag': contoh.flag,
+      'time': contoh.time,
     });
-    // ini hanyalah code kosong
   }
 
   @override
@@ -34,7 +38,7 @@ class _LoadingState extends State<Loading> {
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.all(50),
-        child: Text(time),
+        child: Text('loading'),
       ),
     );
   }
